@@ -1,3 +1,5 @@
+/* styles.css */
+ 
 /* =========================================
    1. THEME VARIABLES (The New Colors)
    ========================================= */
@@ -67,45 +69,52 @@
 }
 
 /* Dark Mode Support */
+/* Dark Mode Support */
 .dark {
-  --background: oklch(0.2679 0.0036 106.6427);
-  --foreground: oklch(0.8074 0.0142 93.0137);
-  --card: oklch(0.2679 0.0036 106.6427);
-  --card-foreground: oklch(0.9818 0.0054 95.0986);
-  --popover: oklch(0.3085 0.0035 106.6039);
-  --popover-foreground: oklch(0.9211 0.0040 106.4781);
-  --primary: oklch(0.6724 0.1308 38.7559);
-  --primary-foreground: oklch(1.0000 0 0);
-  --secondary: oklch(0.9818 0.0054 95.0986);
-  --secondary-foreground: oklch(0.3085 0.0035 106.6039);
-  --muted: oklch(0.2213 0.0038 106.7070);
-  --muted-foreground: oklch(0.7713 0.0169 99.0657);
-  --accent: oklch(0.2130 0.0078 95.4245);
-  --accent-foreground: oklch(0.9663 0.0080 98.8792);
-  --destructive: oklch(0.6368 0.2078 25.3313);
-  --destructive-foreground: oklch(1.0000 0 0);
-  --border: oklch(0.3618 0.0101 106.8928);
-  --input: oklch(0.4336 0.0113 100.2195);
-  --ring: oklch(0.6724 0.1308 38.7559);
+  --background: #121317;
+  --foreground: #E9ECEF;
+  --card: #18191b;
+  --card-foreground: #e6e6e6;
+  --popover: #1b1c1e;
+  --popover-foreground: #e9ecef;
+
+  /* CHANGE: Replaced Green (#9bbf7a) with the Brown color from Light Mode */
+  --primary: oklch(0.6171 0.1375 39.0427); 
+  --primary-foreground: #ffffff; /* Changed to white for better contrast on brown */
+
+  --secondary: #222427;
+  --secondary-foreground: #cfcfcf;
+  --muted: #2b2d2f;
+  --muted-foreground: #bfbfbf;
+  --accent: #2f8bff;
+  --accent-foreground: #ffffff;
+  --destructive: #c65b5b;
+  --destructive-foreground: #fff1f1;
+  --border: #2e2f32;
+  --input: #1b1b1d;
+  
+  /* CHANGE: Also update the Ring to match */
+  --ring: oklch(0.6171 0.1375 39.0427);
   
   /* Dark Charts */
-  --chart-1: oklch(0.5583 0.1276 42.9956);
-  --chart-2: oklch(0.6898 0.1581 290.4107);
-  --chart-3: oklch(0.2130 0.0078 95.4245);
-  --chart-4: oklch(0.3074 0.0516 289.3230);
-  --chart-5: oklch(0.5608 0.1348 42.0584);
+  --chart-1: #7fb769;
+  --chart-2: #5b9ae6;
+  --chart-3: #4bb6a9;
+  --chart-4: #6a8ad6;
+  --chart-5: #f3c56b;
 
-  /* Dark Sidebar */
-  --sidebar: oklch(0.2357 0.0024 67.7077);
-  --sidebar-foreground: oklch(0.8074 0.0142 93.0137);
-  --sidebar-primary: oklch(0.3250 0 0);
-  --sidebar-primary-foreground: oklch(0.9881 0 0);
-  --sidebar-accent: oklch(0.1680 0.0020 106.6177);
-  --sidebar-accent-foreground: oklch(0.8074 0.0142 93.0137);
-  --sidebar-border: oklch(0.9401 0 0);
-  --sidebar-ring: oklch(0.7731 0 0);
+  /* Sidebar */
+  --sidebar: #141517;
+  --sidebar-foreground: #e9ecef;
+  --sidebar-primary: #0b0b0b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1f2937;
+  --sidebar-accent-foreground: #dbeafe;
+  --sidebar-border: #2b2c2d;
+  
+  /* CHANGE: Sidebar ring to match */
+  --sidebar-ring: oklch(0.6171 0.1375 39.0427);
 }
-
 /* =========================================
    2. MAIN LAYOUT & TYPOGRAPHY
    ========================================= */
@@ -113,7 +122,6 @@
 html, body { height: 100%; }
 
 body {
-  /* Updated to use the font variable from your code */
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
@@ -191,8 +199,17 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none; cursor: pointer;
 }
 
-/* Desktop Nav */
-.nav-links { display: flex; gap: 18px; flex-grow: 1; justify-content: center; align-items: center; }
+/* styles.css line 413 */
+.nav-links { 
+  display: flex; 
+  gap: 18px; 
+  
+  /* CHANGE: Use margin auto to center it safely instead of flex-grow */
+  margin: 0 auto; 
+  
+  justify-content: center; 
+  align-items: center; 
+}
 
 .nav-links a {
   color: var(--muted-foreground);
@@ -206,26 +223,46 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-1px); 
 }
 
-.header-right { display: flex; align-items: center; gap: 12px; }
+.header-right { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+  
+  /* Ensures the button is never hidden */
+  flex-shrink: 0;
+  min-width: 80px; 
+  
+  /* NEW: This pushes the button away from the edge */
+  margin-right: 5%; 
 
-/* --- Theme Toggle Button Style --- */
+}
 #theme-toggle {
-  background: none;
-  border: none;
+  background: var(--secondary);
+  border: 1px solid var(--border);
   color: var(--foreground);
   font-size: 1.1rem;
   cursor: pointer;
   padding: 8px;
-  border-radius: var(--radius);
-  display: flex;
+  border-radius: calc(var(--radius) * 1.1);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  z-index: 1100;
+  min-width: 44px;
+  min-height: 44px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
+#theme-toggle i { pointer-events: none; }
+
 #theme-toggle:hover {
-  background-color: var(--secondary);
-  color: var(--primary);
+  transform: translateY(-2px);
+  background-color: color-mix(in srgb, var(--secondary), var(--background) 10%);
+  
+  /* Change this back to var(--primary) */
+  /* It will now automatically be Brown because of the change above! */
+  color: var(--primary); 
 }
 
 .search-icon { color: var(--foreground); font-size: 1.1rem; cursor: pointer; padding: 8px; border-radius: var(--radius); }
@@ -282,15 +319,9 @@ h1, h2, h3, h4, h5, h6 {
 .icon-web { background-color: var(--primary); color: var(--primary-foreground); }
 .icon-linkedin { background-color: #0077b5; color: white; }
 .icon-scholar {
-  /* This fills the circle with your main dark color so it pops out */
   background-color: var(--primary);
-  
-  /* This makes the letter 'R' white */
   color: var(--primary-foreground);
-  
-  /* Matches the border to the background */
   border: 1px solid var(--primary);
-  
   font-weight: bold;
   font-size: 1.5em;
 }
@@ -299,10 +330,12 @@ h1, h2, h3, h4, h5, h6 {
 /* =========================================
    5. HOME SECTION
    ========================================= */
+/* changed to use card so it follows dark mode more reliably */
 .home-section { 
-  background-color: var(--secondary); 
+  background-color: var(--card); 
   padding: 34px 0; border-radius: var(--radius); margin-top: 10px; 
   border: 1px solid var(--border);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .about-me-container { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; align-items: center; padding: 0 20px; }
@@ -493,5 +526,4 @@ h1, h2, h3, h4, h5, h6 {
 #scrollToTop.show { display: flex; animation: fadeIn 0.4s ease forwards; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
 @media (max-width: 600px) { #scrollToTop { width: 38px; height: 38px; font-size: 16px; bottom: 20px; right: 20px; } }
