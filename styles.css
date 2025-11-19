@@ -281,7 +281,19 @@ h1, h2, h3, h4, h5, h6 {
 .icon-email { background-color: var(--muted-foreground); color: white; }
 .icon-web { background-color: var(--primary); color: var(--primary-foreground); }
 .icon-linkedin { background-color: #0077b5; color: white; }
-.icon-scholar { background-color: var(--secondary); color: var(--primary); border: 1px solid var(--border); font-weight: bold; font-size: 1.5em; }
+.icon-scholar {
+  /* This fills the circle with your main dark color so it pops out */
+  background-color: var(--primary);
+  
+  /* This makes the letter 'R' white */
+  color: var(--primary-foreground);
+  
+  /* Matches the border to the background */
+  border: 1px solid var(--primary);
+  
+  font-weight: bold;
+  font-size: 1.5em;
+}
 
 
 /* =========================================
@@ -481,4 +493,5 @@ h1, h2, h3, h4, h5, h6 {
 #scrollToTop.show { display: flex; animation: fadeIn 0.4s ease forwards; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
 @media (max-width: 600px) { #scrollToTop { width: 38px; height: 38px; font-size: 16px; bottom: 20px; right: 20px; } }
