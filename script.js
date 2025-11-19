@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- Navigation and Page Switching ---
@@ -153,6 +154,71 @@ document.addEventListener('DOMContentLoaded', () => {
       const cvEl = document.getElementById('cv');
       if (cvEl && cvEl.classList.contains('active')) loadCV();
     });
+  })();
+
+  // --- Dark mode toggle ---
+  (function setupThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const storageKey = 'site-theme'; // 'dark' or 'light'
+
+    // detect system preference
+    const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        root.classList.add('dark');
+        if (toggleBtn) {
+          toggleBtn.innerHTML = '<i class="fas fa-sun" aria-hidden="true"></i>';
+          toggleBtn.setAttribute('aria-pressed', 'true');
+          toggleBtn.title = 'Switch to light mode';
+        }
+      } else {
+        root.classList.remove('dark');
+        if (toggleBtn) {
+          toggleBtn.innerHTML = '<i class="fas fa-moon" aria-hidden="true"></i>';
+          toggleBtn.setAttribute('aria-pressed', 'false');
+          toggleBtn.title = 'Switch to dark mode';
+        }
+      }
+      // ensure text color follows the current CSS variable
+      document.body.style.color = getComputedStyle(root).getPropertyValue('--foreground');
+    }
+
+    // initial state: localStorage -> system -> default (light)
+    const stored = localStorage.getItem(storageKey);
+    if (stored === 'dark') {
+      applyTheme(true);
+    } else if (stored === 'light') {
+      applyTheme(false);
+    } else if (mq && mq.matches) {
+      applyTheme(true);
+    } else {
+      applyTheme(false);
+    }
+
+    // toggle on click
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const isNowDark = !root.classList.contains('dark');
+        applyTheme(isNowDark);
+        localStorage.setItem(storageKey, isNowDark ? 'dark' : 'light');
+      });
+    }
+
+    // if user has not chosen explicitly, respond to system changes
+    if (mq) {
+      const handlePrefChange = (e) => {
+        if (!localStorage.getItem(storageKey)) {
+          applyTheme(e.matches);
+        }
+      };
+      if (typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', handlePrefChange);
+      } else if (typeof mq.addListener === 'function') {
+        mq.addListener(handlePrefChange);
+      }
+    }
   })();
 
 }); // <--- Do NOT put any code after this
