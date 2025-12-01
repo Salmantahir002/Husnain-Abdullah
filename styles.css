@@ -527,3 +527,63 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 600px) { #scrollToTop { width: 38px; height: 38px; font-size: 16px; bottom: 20px; right: 20px; } }
+
+/* =========================================
+   12. FEATURED GRADUATION IMAGE (FABULOUS STYLE)
+   ========================================= */
+
+/* --- Desktop & Laptop Styles --- */
+.graduation-featured {
+  display: block;
+  width: 90%;
+  max-width: 850px;
+  margin: 50px auto 30px auto;
+  
+  /* THE FABULOUS FRAME */
+  padding: 14px;                 /* White "Matting" space */
+  background-color: var(--card); 
+  
+  /* STYLING: A "Double" border looks like a certificate frame */
+  border: 4px double var(--primary); 
+  border-radius: 14px;
+  
+  /* DEPTH: A deep, soft shadow to make it pop off the screen */
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.2);
+  
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation */
+}
+
+/* THE INNER PHOTO */
+.graduation-featured img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  
+  /* NEW: A thin hairline border around the photo itself for sharpness */
+  border: 1px solid var(--border); 
+}
+
+/* HOVER EFFECT (The "Aura") */
+.graduation-featured:hover {
+  transform: translateY(-8px) scale(1.01); /* Higher lift + slight zoom */
+  
+  /* Border turns dark/sharp on hover */
+  border-color: var(--foreground); 
+  border-style: solid; /* Switches from Double to Solid for a cool effect */
+  border-width: 2px;   /* Adjust width to match the visual weight */
+  
+  /* Shadow grows larger */
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Mobile Device Styles (Responsive) --- */
+@media (max-width: 700px) {
+  .graduation-featured {
+    width: 94%;
+    margin: 30px auto 15px auto;
+    padding: 8px;           /* Slightly tighter on phones */
+    border-width: 3px;      /* Slightly thinner border */
+  }
+}
+
